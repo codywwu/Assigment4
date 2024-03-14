@@ -27,7 +27,23 @@
       <portfolio name="Portfolio3">
         <stock name="TSLA" value="13"/>
       </portfolio>
-    <portfolio name="portfolio1"><stock name="GOOG" value="250"/></portfolio><portfolio name="Portfolio1"/><portfolio name="importedPortfolio"><stock name="AAPL" value="0"/></portfolio><portfolio name="importedPortfolio"><stock name="AAPL" value="0"/></portfolio><portfolio name="importedPortfolio"><stock name="AAPL" value="0"/></portfolio><portfolio name="ppp"><stock name="KO" value="20"/></portfolio></portfolios>
+      <portfolio name="portfolio1">
+        <stock name="GOOG" value="250"/>
+      </portfolio>
+      <portfolio name="Portfolio1"/>
+      <portfolio name="importedPortfolio">
+        <stock name="AAPL" value="0"/>
+      </portfolio>
+      <portfolio name="importedPortfolio">
+        <stock name="AAPL" value="0"/>
+      </portfolio>
+      <portfolio name="importedPortfolio">
+        <stock name="AAPL" value="0"/>
+      </portfolio>
+      <portfolio name="ppp">
+        <stock name="KO" value="20"/>
+      </portfolio>
+    </portfolios>
 
   </user>
   <user name="aa">
@@ -40,7 +56,13 @@
       <portfolio name="Portfolio1">
         <stock name="JPM" value="20"/>
       </portfolio>
-    <portfolio name="importedPortfolio"><stock name="AAPL" value="0"/></portfolio><portfolio name="importedPortfolio"><stock name="AAPL" value="0"/></portfolio></portfolios>
+      <portfolio name="importedPortfolio">
+        <stock name="AAPL" value="0"/>
+      </portfolio>
+      <portfolio name="importedPortfolio">
+        <stock name="AAPL" value="0"/>
+      </portfolio>
+    </portfolios>
   </user>
   <user name="Dell">
     <password value=""/>
@@ -110,4 +132,27 @@
       </portfolio>
     </portfolios>
   </user>
-<user name="aaa"><password value=""/><portfolios><portfolio name="importedPortfolio"><stock name="AAPL" value="10"/></portfolio><portfolio name="AAPL"><stock name="AAPL" value="25"/><stock name="AMZN" value="34"/></portfolio><portfolio name="Po1"><stock name="GOOG" value="23"/></portfolio></portfolios></user><user name="Wwq"><password value=""/><portfolios><portfolio name="GOOG"><stock name="GOOG" value="20"/></portfolio></portfolios></user></users>
+  <user name="aaa">
+    <password value=""/>
+    <portfolios>
+      <portfolio name="importedPortfolio">
+        <stock name="AAPL" value="10"/>
+      </portfolio>
+      <portfolio name="AAPL">
+        <stock name="AAPL" value="25"/>
+        <stock name="AMZN" value="34"/>
+      </portfolio>
+      <portfolio name="Po1">
+        <stock name="GOOG" value="23"/>
+      </portfolio>
+    <portfolio name="Po2"><stock name="GOOG" value="530"/></portfolio></portfolios>
+  </user>
+  <user name="Wwq">
+    <password value=""/>
+    <portfolios>
+      <portfolio name="GOOG">
+        <stock name="GOOG" value="20"/>
+      </portfolio>
+    </portfolios>
+  </user>
+<user name="ata"><password value=""/><portfolios/></user><user name="aaa 1 3 AAPL 945935 "><password value=""/><portfolios/></user><user name="aaa 1 945935 "><password value=""/><portfolios/></user></users>

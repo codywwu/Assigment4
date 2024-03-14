@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Model of the project that will be the bridge between the controller and view.
  */
-public class Model {
+public class Model implements ModelInterface{
 
   private XMLDatabase xmlDatabase;
   private List<Portfolio> userPortfolios;
@@ -38,7 +38,7 @@ public class Model {
    * @param name name needed to be checked.
    * @return true if not.
    */
-  public Boolean checkInputName(String name) {
+  public boolean checkInputName(String name) {
     user = new User(name, 0);
     return XMLDatabase.checkName(name);
   }
@@ -142,7 +142,7 @@ public class Model {
    * @param date  the data.
    * @return true if data is in xml.
    */
-  public Boolean dataCheckExistInXML(Stock stock, String date) {
+  public boolean dataCheckExistInXML(Stock stock, String date) {
     return xmlDatabase.isDateExistInXML(stock.getCompanyName(), date);
   }
 
@@ -214,7 +214,7 @@ public class Model {
    * @param inFile file name.
    * @return true if existed.
    */
-  public Boolean checkFileExists(String inFile) {
+  public boolean checkFileExists(String inFile) {
     File folder = new File("./InputData/");
 
 //    return folder.exists();

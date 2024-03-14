@@ -177,7 +177,7 @@ public class View {
   public void addMorePortfolioOrDone() throws IOException {
     View.out.append("\n1. Add more stock");
     View.out.append("\n2. Done");
-
+    View.out.append("\nPlease enter the number corresponding to your choice: ");
   }
 
   /**
@@ -186,8 +186,7 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void fillFormIntro() throws IOException {
-    View.out.append("\nPlease enter a company's symbol ");
-    View.out.append("\neg,GooG for google");
+    View.out.append("\nPlease enter a company's symbol (eg,GooG for google): ");
   }
 
   /**
@@ -234,7 +233,7 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void promptQuantityOfPurchase() throws IOException {
-    View.out.append("\nPlease enter the quantity of purchase, the number must be larger than 0:");
+    View.out.append("\nPlease enter the quantity of purchase, the number must be larger than 0: ");
   }
 
   /**
@@ -253,7 +252,7 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void promptForPortfolio() throws IOException {
-    View.out.append("\nPlease enter the name of the portfolio you would like to access:");
+    View.out.append("\nPlease enter the name of the portfolio you would like to access: ");
   }
 
   /**
@@ -263,7 +262,7 @@ public class View {
    */
   public void promptForFileName() throws IOException {
     View.out.append(
-        "\nPlease enter the name of the file you would like to access (no .xml is necessary):");
+        "\nPlease enter the name of the file you would like to access (no .xml is necessary): ");
   }
 
   /**
@@ -273,7 +272,7 @@ public class View {
    */
   public void promptDate() throws IOException {
     View.out.append("\nPlease enter in a date to view "
-        + "the stock's profit on that date (Ex.2024-03-05):");
+        + "the stock's profit on that date (Ex.2024-03-05): ");
   }
 
   /**
@@ -320,7 +319,7 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void invalidDate() throws IOException {
-    View.out.append("\nDate must be in the format of yyyy-MM-dd, please try again:");
+    View.out.append("\nDate must be in the format of yyyy-MM-dd, please try again: ");
   }
 
   /**

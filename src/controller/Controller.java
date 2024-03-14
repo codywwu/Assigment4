@@ -71,7 +71,6 @@ public class Controller {
   public void mainMenu() throws IOException {
     menuSelection = 0;
     whileTrue();
-
   }
 
   /**
@@ -103,6 +102,8 @@ public class Controller {
             case 3:
               viewStocks();
               break;
+            case 945935:
+              return;
             default:
               // Handle invalid menu options
               view.menuSelectInvalid(3);
@@ -125,9 +126,8 @@ public class Controller {
    * @throws IOException IO exception to catch unexpected error.
    */
   private void viewStocks() throws IOException {
-    input = new Scanner(this.in);
     view.promptForPortfolio();
-    String portfolioName = input.nextLine();
+    String portfolioName = input.next();
     while (!model.checkPortfolioName(portfolioName)) {
       view.invalidPortfolioUsernameInput();
       portfolioName = input.nextLine();
@@ -150,10 +150,13 @@ public class Controller {
         break;
       case 2:
         exitProgram();
-        break;
+        return;
       case 3:
         enterDateViewStock(portfolioName);
         break;
+      case 945935:
+        return;
+
     }
     mainMenu();
   }
@@ -165,7 +168,6 @@ public class Controller {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void enterDateViewStock(String portfolioName) throws IOException {
-    input = new Scanner(this.in);
     view.promptDate();
     String date = input.nextLine();
     while (!isValidDateFormat(date)) {
@@ -250,6 +252,8 @@ public class Controller {
   public boolean validMenuSelection(int input, int range) throws IOException {
     if ((input <= 0 || input > range)) {
       view.menuSelectInvalid(range);
+    }if (input==945935){
+      return false;
     }
     return input <= 0 || input > range;
   }
@@ -259,7 +263,7 @@ public class Controller {
    */
   public void exitProgram() {
     view.goodBey();
-    System.exit(0);
+    return;
   }
 
 
@@ -303,6 +307,8 @@ public class Controller {
       case 4:
         exitProgram();
         break;
+      case 945935:
+        return;
     }
   }
 
@@ -322,7 +328,6 @@ public class Controller {
       fileName = input.nextLine();
     }
     model.readImport(fileName);
-
     if (model.getPortfolio() != null) {
       model.newXML();
       model.addPortfolioUser();
@@ -390,6 +395,8 @@ public class Controller {
     }
     view.addCompanyOrDone();
     menuSelection = 0;
+    view.addMorePortfolioOrDone();
+    menuSelection = input.nextInt();
     while (validMenuSelection(menuSelection, 2)) {
       view.addMorePortfolioOrDone();
       menuSelection = input.nextInt();
@@ -401,13 +408,15 @@ public class Controller {
         break;
       case 2:
         doneCreatPortfolio();
+      case 945935:
+        return;
     }
   }
 
   /**
    * handle when user click done .
    *
-   * @throws IOExceptionIO exception to catch unexpected error.
+   * @throws IOException IO exception to catch unexpected error
    */
   private void doneCreatPortfolio() throws IOException {
     model.addPortfolioUser();
@@ -446,6 +455,8 @@ public class Controller {
       case 3:
         exitProgram();
         break;
+      case 945935:
+        return;
     }
   }
 

@@ -395,7 +395,7 @@ public class XMLDatabase {
   public static Company stockValueByGivenDate(String givenDate, String filePath) {
     Company company = null;
     try {
-      filePath = "../" + filePath + "_StockData.xml";
+      filePath = "./" + filePath + "_StockData.xml";
       File xmlFile = new File(filePath);
 
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -483,6 +483,5 @@ public class XMLDatabase {
     // System.out.print("The date your provided was not a business day");
     return false; // Given date not found
   }
-
 
 }
