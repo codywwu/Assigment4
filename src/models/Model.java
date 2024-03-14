@@ -215,7 +215,7 @@ public class Model implements ModelInterface{
    * @return true if existed.
    */
   public boolean checkFileExists(String inFile) {
-    File folder = new File("../InputData/");
+    File folder = new File("./InputData/");
 
 //    return folder.exists();
     File[] files = folder.listFiles();
