@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import views.View;
 
@@ -7,6 +9,12 @@ public class MockModel implements ModelInterface {
 
   private StringBuilder log;
   private final Stock empty= new Stock("ABC", 333);
+
+  private XMLDatabase xmlDatabase;
+  private List<Portfolio> userPortfolios = new ArrayList<>();
+  private User user;
+
+  private Portfolio portfolio;
 
   public MockModel(StringBuilder log) {
     this.log=log;
@@ -27,28 +35,58 @@ public class MockModel implements ModelInterface {
 
   @Override
   public void addPortfolioUser() {
-    log.append("added user to data");
+    userPortfolios.add(portfolio);
+    log.append("Portfolio added to user's data");
   }
 
   @Override
   public void createPortfolio(String name) {
-    log.append("portfolio created");
+    log.append(name).append(" portfolio created");
   }
 
   @Override
   public boolean checkPortfolioName(String input) {
+    for (Portfolio portfolio : userPortfolios) {
+      if (portfolio.name.equals(input)) {
+        return true;
+      }
+    }
     return false;
   }
 
   @Override
-  public Stock createStock(String companySymbol, long userShared) {
+  public ArrayList<Portfolio> getPList() {
+    return new ArrayList<>(userPortfolios);
+  }
 
-    return empty;
+  @Override
+  public List<Portfolio> getUserPortfolios() {
+    return userPortfolios;
+  }
+
+  @Override
+  public Portfolio getPortfolio() {
+    return portfolio;
+  }
+
+  public Stock createStock(String companySymbol, long userShared) {
+    log.append("created null Stock data");
+    return null; // Or return a specific Stock object
   }
 
   @Override
   public void newXML() {
     log.append("XML data read");
+  }
+
+  @Override
+  public String getDatahigh() {
+    return null;
+  }
+
+  @Override
+  public String getDataLow() {
+    return null;
   }
 
   @Override
@@ -72,5 +110,20 @@ public class MockModel implements ModelInterface {
   @Override
   public void readImport(String fileName) {
     log.append("read files");
+  }
+
+  @Override
+  public void addPToXML() {
+
+  }
+
+  @Override
+  public void addCompanyXML(String c) {
+
+  }
+
+  public boolean checkIfPortfolioEmpty(List<Portfolio> userPortfolios){
+    log.append("if user created any portfolio");
+    return true;
   }
 }

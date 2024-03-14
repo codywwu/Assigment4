@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import models.Company;
 import models.Model;
+import models.ModelInterface;
 import models.Portfolio;
 import models.Stock;
 import models.XMLDatabase;
@@ -22,7 +23,7 @@ public class Controller {
 
   private Scanner input;
   private int menuSelection = 0;
-  private final Model model= new Model();
+  private final Model model;
   private static View view;
   final Readable in;
   final Appendable out;
@@ -33,11 +34,12 @@ public class Controller {
    * @param in    system in.
    * @param out   system out.
    */
-  public Controller( Readable in, Appendable out) {
+  public Controller(ModelInterface model, Readable in, Appendable out) {
     this.in = in;
     this.out = out;
     this.input = new Scanner(this.in);
     this.view = new View(out);
+    this.model= (Model) model;
   }
 
   /**
