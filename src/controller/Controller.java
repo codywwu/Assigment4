@@ -43,6 +43,7 @@ public class Controller {
     this.model= model;
   }
 
+
   /**
    * introduction menu for user.
    *
@@ -91,7 +92,7 @@ public class Controller {
       try {
         portfolioAction = input.nextInt();
         if (validMenuSelection(portfolioAction, 3)) {
-          input.nextLine(); // Consume the invalid input
+          input.next(); // Consume the invalid input
 
         } else {
           // Process the valid input
@@ -347,7 +348,7 @@ public class Controller {
    */
   private void setPortfolioName() throws IOException {
     view.fillFormPortfolioName();
-    String portfolioName = input.nextLine();
+    String portfolioName = input.next();
     while (model.checkPortfolioName(portfolioName)) {
       view.invalidPortfolio();
       portfolioName = input.nextLine();

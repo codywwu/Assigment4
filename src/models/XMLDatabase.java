@@ -47,7 +47,7 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("./res/InputData/data.xml"));
+      document = builder.parse(new File("./InputData/data.xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
@@ -63,7 +63,7 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("../Assigment4/res/InputData/"+fileName+".xml"));
+      document = builder.parse(new File("./InputData/"+fileName+".xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
@@ -249,7 +249,7 @@ public class XMLDatabase {
       transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
       DOMSource source = new DOMSource(document);
-      StreamResult result = new StreamResult(new File("../Assigment4/res/InputData/data.xml"));
+      StreamResult result = new StreamResult(new File("./InputData/data.xml"));
       transformer.transform(source, result);
     } catch (TransformerException e) {
       e.printStackTrace();
@@ -265,7 +265,7 @@ public class XMLDatabase {
     String apiKey = "W0M1JOKC82EZEQA8";
     URL url;
     String fileName = companyName + "_StockData.xml";
-    String relativePath = "../res/outputFile/" + fileName;
+    String relativePath = "./outputFile/" + fileName;
 
     try {
       url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY"
@@ -275,7 +275,7 @@ public class XMLDatabase {
     }
 
     // Ensure the outputFile directory exists
-    File directory = new File("../res/outputFile/");
+    File directory = new File("./outputFile/");
     if (!directory.exists()) {
       directory.mkdirs();
     }
@@ -400,7 +400,7 @@ public class XMLDatabase {
   public static Company stockValueByGivenDate(String givenDate, String filePath) {
     Company company = null;
     try {
-      filePath = "../res/outputFile/" + filePath + "_StockData.xml";
+      filePath = "./outputFile/" + filePath + "_StockData.xml";
       File xmlFile = new File(filePath);
 
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -459,7 +459,7 @@ public class XMLDatabase {
    */
   public boolean isDateExistInXML(String filePath, String givenDate) {
     try {
-      filePath = "../res/outputFile/"+filePath+"_StockData.xml";
+      filePath = "./outputFile/"+filePath+"_StockData.xml";
       File xmlFile = new File(filePath);
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
