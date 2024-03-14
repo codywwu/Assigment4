@@ -1,18 +1,14 @@
 package models;
 
-import models.Model;
-import models.Portfolio;
-import models.User;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Assert;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simple tests for model class,
+ */
 public class ModelTest {
 
     @Test

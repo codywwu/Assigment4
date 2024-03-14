@@ -64,6 +64,7 @@ public class View {
 
   /**
    * print some new lines.
+   * @throws IOException IO exception to catch unexpected error.
    */
   public static void newLines() throws IOException {
     View.out.append("\n");
@@ -72,7 +73,7 @@ public class View {
   /**
    * print invalid date.
    *
-   * @throws IOException
+   * @throws IOException IO exception to catch unexpected error.
    */
   public static void printDateInValid() throws IOException {
     View.out.append(
@@ -391,7 +392,9 @@ public class View {
   }
 
   /**
+   * @param portfolios portfolios class.
    * Display the stocks info inside the portfolio.
+   * @throws IOException IO exception to catch unexpected error.
    */
   public void displayPortfolios(List<Portfolio> portfolios) throws IOException {
     if (portfolios.isEmpty()) {
@@ -426,7 +429,7 @@ public class View {
   /**
    * stock menu.
    *
-   * @throws IOException
+   @throws IOException IO exception to catch unexpected error.
    */
   public void stockMenu() throws IOException {
     View.out.append("\n1, Exit to Main menu");
@@ -438,7 +441,7 @@ public class View {
   /**
    * portfolio's menu.
    *
-   * @throws IOException
+   @throws IOException IO exception to catch unexpected error.
    */
   public void portfolioMenu() throws IOException {
     View.out.append("\n1, Exit to Main menu");
