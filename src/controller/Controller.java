@@ -23,7 +23,7 @@ public class Controller {
 
   private Scanner input;
   private int menuSelection = 0;
-  private final Model model;
+  private final ModelInterface model;
   private static View view;
   final Readable in;
   final Appendable out;
@@ -39,7 +39,7 @@ public class Controller {
     this.out = out;
     this.input = new Scanner(this.in);
     this.view = new View(out);
-    this.model= (Model) model;
+    this.model= model;
   }
 
   /**

@@ -24,8 +24,9 @@ public class ControllerTest {
     Controller controller = new Controller(mm,in, out);
     controller.intro();
     assertEquals(
-        "\nPlease enter a username: \n"
-            + "Hello aaa, Welcome To Money For US\n"
+        "\n"
+            + "Please enter a username: \n"
+            + "Hello, new user: aaa, Welcome To Money For US\n"
             + "Main menu\n"
             + "1. View Created Portfolio\n"
             + "2. Create new Portfolio\n"
