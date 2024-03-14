@@ -99,9 +99,7 @@ public class MockModel implements ModelInterface {
 
   @Override
   public boolean checkFileExists(String inFile) {
-
-    log.append("check if file had been created");
-    return false;
+    return true;
   }
 
   @Override

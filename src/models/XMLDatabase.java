@@ -47,7 +47,7 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("../res/InputData/data.xml"));
+      document = builder.parse(new File("./res/InputData/data.xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
@@ -63,7 +63,7 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("../res/InputData/"+fileName+".xml"));
+      document = builder.parse(new File("../Assigment4/res/InputData/"+fileName+".xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();

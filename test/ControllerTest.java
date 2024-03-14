@@ -296,7 +296,44 @@ public class ControllerTest {
         out.toString());
   }
 
-  
+  @Test
+  public void testImport()throws IOException {
+    String input = "aaa\n2\n1\nNewUser\n945935";
+    Reader in = new StringReader(input);
+    StringBuffer out = new StringBuffer();
+    StringBuilder log = new StringBuilder();
+    MockModel mm =new MockModel(log);
+    Controller controller = new Controller(mm,in, out);
+    controller.intro();
+    assertEquals("\n"
+        + "Please enter a username: \n"
+        + "Hello, new user: aaa, Welcome To Money For US\n"
+        + "Main menu\n"
+        + "1. View Created Portfolio\n"
+        + "2. Create new Portfolio\n"
+        + "3. Exit Program\n"
+        + "Please enter the number corresponding to your choice: \n"
+        + "There are two ways to create a new Portfolio: \n"
+        + "1. Import new portfolio\n"
+        + "2. Filled out the form\n"
+        + "3. Go back to main menu\n"
+        + "4. Exit Program\n"
+        + "Please enter the number corresponding to your choice: \n"
+        + "Please enter the name of the file you would like to access (no .xml is necessary): \n"
+        + "Import file success!\n"
+        + "Main menu\n"
+        + "1. View Created Portfolio\n"
+        + "2. Create new Portfolio\n"
+        + "3. Exit Program\n"
+        + "Please enter the number corresponding to your choice: \n"
+        + "Invalid input. Please enter a number.\n"
+        + "Main menu\n"
+        + "1. View Created Portfolio\n"
+        + "2. Create new Portfolio\n"
+        + "3. Exit Program\n"
+        + "Please enter the number corresponding to your choice: \n"
+        + "Invalid input. Please enter a number between 1 and 3",out.toString());
+  }
 
   @Test
   public void testInValidMenuSelection() throws IOException {
