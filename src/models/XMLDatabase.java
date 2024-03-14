@@ -47,7 +47,7 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("./res/data.xml"));
+      document = builder.parse(new File("../res/InputData/data.xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
@@ -63,7 +63,7 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("./InputData/"+fileName+".xml"));
+      document = builder.parse(new File("../res/InputData/"+fileName+".xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
@@ -249,7 +249,7 @@ public class XMLDatabase {
       transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
       DOMSource source = new DOMSource(document);
-      StreamResult result = new StreamResult(new File("./res/data.xml"));
+      StreamResult result = new StreamResult(new File("../res/InputData/data.xml"));
       transformer.transform(source, result);
     } catch (TransformerException e) {
       e.printStackTrace();
@@ -259,22 +259,29 @@ public class XMLDatabase {
 
   /**
    * creat a XML file for a company.
-   * @param companyName
+   * @param companyName company's name.
    */
   public void createXMLbyCompanyInfo(String companyName) {
     String apiKey = "W0M1JOKC82EZEQA8";
     URL url;
     String fileName = companyName + "_StockData.xml";
+    String relativePath = "../res/outputFile/" + fileName;
 
     try {
       url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY"
-          + "&outputsize=full" + "&symbol=" + companyName + "&apikey=" + apiKey + "&datatype=csv");
+              + "&outputsize=full" + "&symbol=" + companyName + "&apikey=" + apiKey + "&datatype=csv");
     } catch (MalformedURLException e) {
       throw new RuntimeException("the alphavantage API has either changed or no longer works");
     }
 
+    // Ensure the outputFile directory exists
+    File directory = new File("../res/outputFile/");
+    if (!directory.exists()) {
+      directory.mkdirs();
+    }
+
     try (InputStream in = url.openStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+         BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
       String line;
       reader.readLine(); // Skip the header line
 
@@ -287,7 +294,6 @@ public class XMLDatabase {
       while ((line = reader.readLine()) != null) {
         String[] data = line.split(",");
 
-        // Assuming data follows the format: timestamp,open,high,low,close,volume
         if (data.length >= 6) {
           Element record = document.createElement("Record");
           rootElement.appendChild(record);
@@ -321,18 +327,17 @@ public class XMLDatabase {
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();
       DOMSource domSource = new DOMSource(document);
-      StreamResult streamResult = new StreamResult(new File(fileName));
+      StreamResult streamResult = new StreamResult(new File(relativePath)); // Use relativePath instead of fileName
       transformer.transform(domSource, streamResult);
 
     } catch (IOException | TransformerException | ParserConfigurationException e) {
       e.printStackTrace();
     }
   }
-
   /**
    * check if the companySymbol exist.
-   * @param stockSymbol
-   * @return
+   * @param stockSymbol company symbol.
+   * @return true if exist.
    */
   public static boolean companySymbolExists( String stockSymbol) {
     String apiKey = "W0M1JOKC82EZEQA8";
@@ -395,7 +400,7 @@ public class XMLDatabase {
   public static Company stockValueByGivenDate(String givenDate, String filePath) {
     Company company = null;
     try {
-      filePath = "./" + filePath + "_StockData.xml";
+      filePath = "../res/outputFile/" + filePath + "_StockData.xml";
       File xmlFile = new File(filePath);
 
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -454,7 +459,7 @@ public class XMLDatabase {
    */
   public boolean isDateExistInXML(String filePath, String givenDate) {
     try {
-      filePath = "./"+filePath+"_StockData.xml";
+      filePath = "../res/outputFile/"+filePath+"_StockData.xml";
       File xmlFile = new File(filePath);
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

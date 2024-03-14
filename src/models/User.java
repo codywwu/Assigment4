@@ -26,7 +26,8 @@ public class User implements UserInterface {
     this.buyingPower = buyingPower;
   }
   /**
-   * @return
+   * get the username.
+   * @return  username
    */
   @Override
   public String getUserName() {
@@ -70,7 +71,6 @@ public class User implements UserInterface {
   /**
    * add a portfolio into the user's portfolio list.
    *
-   * @return the added this portfolio list into user's current list.
    */
   @Override
   public void addPortfolio(Portfolio newPortfolio) {
@@ -80,7 +80,7 @@ public class User implements UserInterface {
   /**
    * get the portfolio by index.
    *
-   * @param i
+   * @param i index of the portfolio.
    * @return return the portfolio by requested index.
    */
   @Override

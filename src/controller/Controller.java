@@ -31,6 +31,7 @@ public class Controller {
   /**
    * constructor for controller.
    *
+   * @param model interface of the model.
    * @param in    system in.
    * @param out   system out.
    */
