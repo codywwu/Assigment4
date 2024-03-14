@@ -145,7 +145,7 @@
       <portfolio name="Po1">
         <stock name="GOOG" value="23"/>
       </portfolio>
-    <portfolio name="Po2"><stock name="GOOG" value="530"/></portfolio></portfolios>
+    <portfolio name="Po2"><stock name="GOOG" value="530"/></portfolio><portfolio name="importedPortfolio"><stock name="AAPL" value="0"/></portfolio></portfolios>
   </user>
   <user name="Wwq">
     <password value=""/>

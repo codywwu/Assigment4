@@ -321,8 +321,7 @@ public class Controller {
    */
   private void importFile() throws IOException {
     view.promptForFileName();
-    String fileName = input.nextLine();
-
+    String fileName = input.next();
     while (!model.checkFileExists(fileName)) {
       view.inValidFile();
       view.promptForFileName();
@@ -436,13 +435,13 @@ public class Controller {
       try {
         menuSelection = input.nextInt();
         if (validMenuSelection(menuSelection, 3)) {
-          input.nextLine(); // Consume the invalid input
+          input.next(); // Consume the invalid input
           continue; // Restart the loop to prompt for input again
         }
         break; // Break out of the loop if input is valid
       } catch (InputMismatchException e) {
         view.NumberInvalidInput();
-        input.nextLine(); // Consume the invalid input
+        input.next(); // Consume the invalid input
       }
     }
     switch (menuSelection) {

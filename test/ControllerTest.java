@@ -326,12 +326,6 @@ public class ControllerTest {
         + "2. Create new Portfolio\n"
         + "3. Exit Program\n"
         + "Please enter the number corresponding to your choice: \n"
-        + "Invalid input. Please enter a number.\n"
-        + "Main menu\n"
-        + "1. View Created Portfolio\n"
-        + "2. Create new Portfolio\n"
-        + "3. Exit Program\n"
-        + "Please enter the number corresponding to your choice: \n"
         + "Invalid input. Please enter a number between 1 and 3",out.toString());
   }
 

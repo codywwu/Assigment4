@@ -249,7 +249,7 @@ public class XMLDatabase {
       transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
       DOMSource source = new DOMSource(document);
-      StreamResult result = new StreamResult(new File("../res/InputData/data.xml"));
+      StreamResult result = new StreamResult(new File("../Assigment4/res/InputData/data.xml"));
       transformer.transform(source, result);
     } catch (TransformerException e) {
       e.printStackTrace();
