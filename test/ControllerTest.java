@@ -131,7 +131,7 @@ public class ControllerTest {
             + "Please enter the number corresponding to your choice: \n"
             + "Please enter the name of the portfolio you would like to access: \n"
             + "Portfolio Name: Po1\n"
-            + "  Stock Name: ABC\n"
+            + "  Stock Name: GOOG\n"
             + "    Shared Value: 333\n"
             + "1, Exit to Main menu\n"
             + "2, Exit the program\n"
@@ -151,7 +151,7 @@ public class ControllerTest {
 
   @Test
   public void testFillFormInvalid() throws IOException {
-    String input = "aaa\n2\n2\nPo1\nGOOG\n234\n945935 ";
+    String input = "aaa\n2\n2\nPo2\nGOOG\n234\n945935 ";
     Reader in = new StringReader(input);
     StringBuffer out = new StringBuffer();
     StringBuilder log = new StringBuilder();
@@ -175,7 +175,6 @@ public class ControllerTest {
             + "Please enter the number corresponding to your choice: \n"
             + "Please enter a portfolio name: \n"
             + "Please enter a company's symbol (eg,GooG for google): \n"
-            + "Please enter a valid company symbol.\n"
             + "Please enter the quantity of purchase, the number must be larger than 0: \n"
             + "You have chosen to purchase 234 shares of GOOG.\n"
             + "Add another company with shares or select done for done creating this port\n"
@@ -188,7 +187,7 @@ public class ControllerTest {
 
   @Test
   public void addPartialStock() throws IOException {
-    String input = "aaa\n2\n2\nPo1\nGOOG\n0.1\n100\n945935 ";
+    String input = "aaa\n2\n2\nPo2\nGOOG\n0.1\n100\n945935 ";
     Reader in = new StringReader(input);
     StringBuffer out = new StringBuffer();
     StringBuilder log = new StringBuilder();
@@ -212,7 +211,6 @@ public class ControllerTest {
             + "Please enter the number corresponding to your choice: \n"
             + "Please enter a portfolio name: \n"
             + "Please enter a company's symbol (eg,GooG for google): \n"
-            + "Please enter a valid company symbol.\n"
             + "Please enter the quantity of purchase, the number must be larger than 0: \n"
             + "Invalid input. Please enter a number.\n"
             + "You have chosen to purchase 100 shares of GOOG.\n"
@@ -226,7 +224,7 @@ public class ControllerTest {
   }
   @Test
   public void addThreeStocks() throws IOException {
-    String input = "aaa\n2\n2\nPo1\nGOOG\n10\n1\nAAPL\n80\n1\nKO\n10\n2\n1\n945935 ";
+    String input = "aaa\n2\n2\nPo2\nGOOG\n10\n1\nAAPL\n80\n1\nKO\n10\n2\n1\n945935 ";
     Reader in = new StringReader(input);
     StringBuffer out = new StringBuffer();
     StringBuilder log = new StringBuilder();
@@ -250,7 +248,6 @@ public class ControllerTest {
             + "Please enter the number corresponding to your choice: \n"
             + "Please enter a portfolio name: \n"
             + "Please enter a company's symbol (eg,GooG for google): \n"
-            + "Please enter a valid company symbol.\n"
             + "Please enter the quantity of purchase, the number must be larger than 0: \n"
             + "You have chosen to purchase 10 shares of GOOG.\n"
             + "Add another company with shares or select done for done creating this port\n"
@@ -272,10 +269,10 @@ public class ControllerTest {
             + "2. Done\n"
             + "Please enter the number corresponding to your choice: \n"
             + "Portfolio 1 - The shares of your portfolio in total: 333\n"
-            + "Stock 1: ABC\n"
+            + "Stock 1: GOOG\n"
             + "\n"
             + "Portfolio 2 - The shares of your portfolio in total: 333\n"
-            + "Stock 1: ABC\n"
+            + "Stock 1: GOOG\n"
             + "\n"
             + "Main menu\n"
             + "1. View Created Portfolio\n"
@@ -294,6 +291,64 @@ public class ControllerTest {
         ,
 
         out.toString());
+  }
+
+  @Test
+  public void testDate() throws IOException {
+    String input = "inNAme\n1\n3\nPo1\n3\n2024-02-02\n945935\n";
+    Reader in = new StringReader(input);
+    StringBuffer out = new StringBuffer();
+    StringBuilder log = new StringBuilder();
+    MockModel mm =new MockModel(log);
+    Controller controller = new Controller(mm,in, out);
+    controller.intro();
+    assertEquals(
+        "\n"
+            + "Please enter a username: \n"
+            + "Hello inNAme, Welcome To Money For US\n"
+            + "Main menu\n"
+            + "1. View Created Portfolio\n"
+            + "2. Create new Portfolio\n"
+            + "3. Exit Program\n"
+            + "Please enter the number corresponding to your choice: \n"
+            + "Portfolio Name: Po1\n"
+            + "  Company quantity: 1\n"
+            + "1, Exit to Main menu\n"
+            + "2, Exit the program\n"
+            + "3, View more details on one portfolio\n"
+            + "Please enter the number corresponding to your choice: \n"
+            + "Please enter the name of the portfolio you would like to access: \n"
+            + "Portfolio Name: Po1\n"
+            + "  Stock Name: GOOG\n"
+            + "    Shared Value: 333\n"
+            + "1, Exit to Main menu\n"
+            + "2, Exit the program\n"
+            + "3, Change dates to view the stock's profit on that date\n"
+            + "Please enter the number corresponding to your choice: \n"
+            + "Please enter in a date to view the stock's profit on that date (Ex.2024-03-05): \n"
+            + "Date must be in the format of yyyy-MM-dd, please try again: \n"
+            + "Each GOOG share worth following on: 2024-02-02\n"
+            + "You have 333 shares on this company\n"
+            + "Date: 2024-02-02\n"
+            + "High: 143.8800\n"
+            + "Low: 138.1700\n"
+            + "Maximum value: 333000.0\n"
+            + "Maximum value: 333000.0\n"
+            + "\n"
+            + "Total portfolio value based on highest stock prices: 333000.0\n"
+            + "Total portfolio value based on lowest stock prices: 333000.0\n"
+            + "\n"
+            + "END OF YOUR PORTFOLIOS\n"
+            + "Portfolio Name: Po1\n"
+            + "  Company quantity: 1\n"
+            + "1, Exit to Main menu\n"
+            + "2, Exit the program\n"
+            + "3, View more details on one portfolio\n"
+            + "Please enter the number corresponding to your choice: \n"
+            + "Invalid input. Please enter a number between 1 and 3",
+        out.toString());
+
+    assertEquals("check if data has an XML file",log.toString());
   }
 
   @Test

@@ -8,7 +8,7 @@ import views.View;
 public class MockModel implements ModelInterface {
 
   private StringBuilder log;
-  private final Stock empty= new Stock("ABC", 333);
+  private final Stock empty= new Stock("GOOG", 333);
 
   private List<Portfolio> userPortfolios;
   private User user;
@@ -83,12 +83,12 @@ public class MockModel implements ModelInterface {
 
   @Override
   public String getDatahigh() {
-    return null;
+    return "1000";
   }
 
   @Override
   public String getDataLow() {
-    return null;
+    return "1000";
   }
 
   @Override
