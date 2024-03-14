@@ -179,7 +179,6 @@ public class Controller {
     //Model.displayPortfolioValueByGivenDate(model.getUserPortfolios(), date,portfolioName );
     boolean validDate = false;
     double totalHighValue = 0;
-    Scanner scanner = new Scanner(this.in);
     double totalLowValue = 0;
     while (!validDate) {
 
@@ -214,7 +213,7 @@ public class Controller {
       }
       if (!validDate) {
         View.printDateInValid();
-        date = scanner.nextLine(); // Read a new date from the user
+        date = input.nextLine(); // Read a new date from the user
       } else {
         // After validating date and calculating values, print total portfolio values
         View.printMaxTotalValue(totalHighValue);
@@ -321,7 +320,6 @@ public class Controller {
    * @throws IOException IO exception to catch unexpected error.
    */
   private void importFile() throws IOException {
-    input = new Scanner(this.in);
     view.promptForFileName();
     String fileName = input.nextLine();
 
@@ -349,7 +347,6 @@ public class Controller {
    * @throws IOException IO exception to catch unexpected error.
    */
   private void setPortfolioName() throws IOException {
-    input = new Scanner(this.in);
     view.fillFormPortfolioName();
     String portfolioName = input.nextLine();
     while (model.checkPortfolioName(portfolioName)) {

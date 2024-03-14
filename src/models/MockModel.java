@@ -10,21 +10,23 @@ public class MockModel implements ModelInterface {
   private StringBuilder log;
   private final Stock empty= new Stock("ABC", 333);
 
-  private XMLDatabase xmlDatabase;
-  private List<Portfolio> userPortfolios = new ArrayList<>();
+  private List<Portfolio> userPortfolios;
   private User user;
 
   private Portfolio portfolio;
 
   public MockModel(StringBuilder log) {
     this.log=log;
-
+    this.portfolio=new Portfolio("Po1");
+    this.portfolio.addStock(empty);
+    this.user=new User("inNAme",1000);
+    user.addPortfolio(portfolio);
+    userPortfolios=user.getPortfolioList();
   }
 
   @Override
   public boolean checkInputName(String name) {
-    log.append("inName is in the Data");
-    return Objects.equals(name, "inNAme");
+    return Objects.equals(name, user.userName);
   }
 
   @Override
