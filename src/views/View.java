@@ -471,4 +471,8 @@ public class View {
   public void goodBey() {
     System.out.println("Good Bye");
   }
+
+    public void promptDateOfPurchase() {
+    System.out.println("Please Enter the date of your purchase (Ex.2024-03-05): ");
+    }
 }

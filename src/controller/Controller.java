@@ -381,6 +381,8 @@ public class Controller {
             input.next(); // Consume the invalid input and prompt again
           }
         }
+
+        view.promptDateOfPurchase();
         view.successPurchase(quantity, companySymbol);
         Stock stock = model.createStock(companySymbol, quantity);
         model.addStockPort(stock);
