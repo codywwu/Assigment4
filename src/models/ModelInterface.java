@@ -3,6 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interface for model, testing purpose.
+ */
 public interface ModelInterface {
 
   static boolean checkIfPortfolioEmpty(List<Portfolio> userPortfolios) {

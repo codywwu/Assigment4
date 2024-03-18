@@ -3,15 +3,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import models.Model;
 
-/**
- * main method to run the program.
- */
+/** main method to run the program. */
 public class Main {
+  /**
+   * main method to run the program.
+   * @param args arguments.
+   * @throws IOException handle unexpected errors.
+   */
   public static void main(String[] args) throws IOException {
-    Model module= new Model();
-    Controller controller = new Controller(module,new InputStreamReader(System.in), System.out);
+    Model module = new Model();
+    Controller controller = new Controller(module, new InputStreamReader(System.in), System.out);
     controller.intro();
     // Start the application by invoking the controller to handle user input
   }
-
 }

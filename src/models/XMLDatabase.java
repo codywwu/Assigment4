@@ -24,30 +24,24 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- * XML Database class, that will process all the xml related.
- */
+/** XML Database class, that will process all the xml related. */
 public class XMLDatabase {
 
   private static Document document;
   public static String highStock;
   public static String lowStock;
 
-  /**
-   * Constructor for XML database, read a file.
-   */
+  /** Constructor for XML database, read a file. */
   public XMLDatabase() {
     readLocalFile();
   }
 
-  /**
-   * read the local file of Userdata.
-   */
+  /** read the local file of Userdata. */
   private void readLocalFile() {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("./InputData/data.xml"));
+      document = builder.parse(new File("../InputData/data.xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
@@ -56,6 +50,7 @@ public class XMLDatabase {
 
   /**
    * read from a XML file that would return a portfolio.
+   *
    * @param fileName name of the file to be import.
    * @return a portfolio imported.
    */
@@ -63,20 +58,21 @@ public class XMLDatabase {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      document = builder.parse(new File("./InputData/"+fileName+".xml"));
+      document = builder.parse(new File("../InputData/" + fileName + ".xml"));
       document.getDocumentElement().normalize();
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
-    } Element portfolioElement = (Element) document.getElementsByTagName("portfolio").item(0);
+    }
+    Element portfolioElement = (Element) document.getElementsByTagName("portfolio").item(0);
     String portfolioName = portfolioElement.getAttribute("name");
-    //creat portfolio
+    // creat portfolio
     Portfolio portfolio = new Portfolio(portfolioName);
     NodeList stockList = portfolioElement.getElementsByTagName("stock");
 
     for (int i = 0; i < stockList.getLength(); i++) {
       Element stockElement = (Element) stockList.item(i);
       Stock stock = getStock(stockElement);
-      if (!companySymbolExists(stock.getCompanyName()) && stock.getUserShared()<=0){
+      if (!companySymbolExists(stock.getCompanyName()) && stock.getUserShared() <= 0) {
         return null;
       }
       createXMLbyCompanyInfo(stock.getCompanyName());
@@ -85,9 +81,9 @@ public class XMLDatabase {
     return portfolio;
   }
 
-
   /**
    * help method for creating documents for users.
+   *
    * @return NodeList for XML data.
    */
   public static NodeList getUsersFromDocument() {
@@ -96,6 +92,7 @@ public class XMLDatabase {
 
   /**
    * get the user element from the XML data.
+   *
    * @param newDocument the document that need to be parsed.
    * @return the NodeList
    */
@@ -105,6 +102,7 @@ public class XMLDatabase {
 
   /**
    * check if the name is valid.
+   *
    * @param inputName company symbol
    * @return true if name is valid.
    */
@@ -125,6 +123,7 @@ public class XMLDatabase {
 
   /**
    * ADd a user into the xml file.
+   *
    * @param username username.
    */
   public void addUser(String username) {
@@ -143,10 +142,9 @@ public class XMLDatabase {
     saveChanges();
   }
 
-
-
   /**
-   * get the portfolio by a username
+   * get the portfolio by a username.
+   *
    * @param username username.
    * @return List of portfolio that this user holds.
    */
@@ -188,6 +186,7 @@ public class XMLDatabase {
 
   /**
    * get the stock by username.
+   *
    * @param stockNode stockNode.
    * @return the stock.
    */
@@ -204,14 +203,15 @@ public class XMLDatabase {
   }
 
   /**
-   *  Add a portfolio by XML.
+   * Add a portfolio by XML.
+   *
    * @param username user name .
    * @param portfolioName porfolioName needed to be add.
    * @param portfolio porfolio that need to be add.
    */
   public void addPortfolioXML(String username, String portfolioName, Portfolio portfolio) {
     NodeList userList = document.getElementsByTagName("user");
-    List<Stock> stocks= portfolio.stockArrayList;
+    List<Stock> stocks = portfolio.stockArrayList;
     for (int i = 0; i < userList.getLength(); i++) {
       Node userNode = userList.item(i);
       if (userNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -237,9 +237,7 @@ public class XMLDatabase {
     }
   }
 
-  /**
-   * Save all the changes to file.
-   */
+  /** Save all the changes to file. */
   private void saveChanges() {
     try {
       Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -249,39 +247,46 @@ public class XMLDatabase {
       transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
       DOMSource source = new DOMSource(document);
-      StreamResult result = new StreamResult(new File("./InputData/data.xml"));
+      StreamResult result = new StreamResult(new File("../InputData/data.xml"));
       transformer.transform(source, result);
     } catch (TransformerException e) {
       e.printStackTrace();
     }
   }
 
-
   /**
    * creat a XML file for a company.
+   *
    * @param companyName company's name.
    */
   public void createXMLbyCompanyInfo(String companyName) {
     String apiKey = "W0M1JOKC82EZEQA8";
     URL url;
     String fileName = companyName + "_StockData.xml";
-    String relativePath = "./outputFile/" + fileName;
+    String relativePath = "../outputFile/" + fileName;
 
     try {
-      url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY"
-              + "&outputsize=full" + "&symbol=" + companyName + "&apikey=" + apiKey + "&datatype=csv");
+      url =
+          new URL(
+              "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY"
+                  + "&outputsize=full"
+                  + "&symbol="
+                  + companyName
+                  + "&apikey="
+                  + apiKey
+                  + "&datatype=csv");
     } catch (MalformedURLException e) {
       throw new RuntimeException("the alphavantage API has either changed or no longer works");
     }
 
     // Ensure the outputFile directory exists
-    File directory = new File("./outputFile/");
+    File directory = new File("../outputFile/");
     if (!directory.exists()) {
       directory.mkdirs();
     }
 
     try (InputStream in = url.openStream();
-         BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
       String line;
       reader.readLine(); // Skip the header line
 
@@ -327,30 +332,40 @@ public class XMLDatabase {
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();
       DOMSource domSource = new DOMSource(document);
-      StreamResult streamResult = new StreamResult(new File(relativePath)); // Use relativePath instead of fileName
+      StreamResult streamResult =
+          new StreamResult(new File(relativePath)); // Use relativePath instead of fileName
       transformer.transform(domSource, streamResult);
 
     } catch (IOException | TransformerException | ParserConfigurationException e) {
       e.printStackTrace();
     }
   }
+
   /**
    * check if the companySymbol exist.
+   *
    * @param stockSymbol company symbol.
    * @return true if exist.
    */
-  public static boolean companySymbolExists( String stockSymbol) {
+  public static boolean companySymbolExists(String stockSymbol) {
     String apiKey = "W0M1JOKC82EZEQA8";
-    String urlTemplate = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=%s&apikey=%s";
+    String urlTemplate =
+        "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=%s&apikey=%s";
     URL url = null;
 
     try {
       // Attempt to create the URL
-      url = new URL("https://www.alphavantage"
-          + ".co/query?function=TIME_SERIES_DAILY"
-          + "&outputsize=full"
-          + "&symbol"
-          + "=" + stockSymbol + "&apikey="+apiKey+"&datatype=csv");
+      url =
+          new URL(
+              "https://www.alphavantage"
+                  + ".co/query?function=TIME_SERIES_DAILY"
+                  + "&outputsize=full"
+                  + "&symbol"
+                  + "="
+                  + stockSymbol
+                  + "&apikey="
+                  + apiKey
+                  + "&datatype=csv");
       // Assuming additional code here for HTTP request and processing the response
       // This is where you'd typically use the 'url' object
 
@@ -379,20 +394,19 @@ public class XMLDatabase {
       in = url.openStream();
       int b;
 
-      while ((b=in.read())!=-1) {
-        output.append((char)b);
+      while ((b = in.read()) != -1) {
+        output.append((char) b);
       }
-    }
-    catch (IOException e) {
-      throw new IllegalArgumentException("No price data found for "+stockSymbol);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("No price data found for " + stockSymbol);
     }
 
     return !output.toString().contains("Error Message");
-
   }
 
   /**
    * calculate the stock value by given date.
+   *
    * @param givenDate the date.
    * @param filePath file's path that from
    * @return a company that hold the infomation.
@@ -400,7 +414,7 @@ public class XMLDatabase {
   public static Company stockValueByGivenDate(String givenDate, String filePath) {
     Company company = null;
     try {
-      filePath = "./outputFile/" + filePath + "_StockData.xml";
+      filePath = "../outputFile/" + filePath + "_StockData.xml";
       File xmlFile = new File(filePath);
 
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -428,7 +442,7 @@ public class XMLDatabase {
             highStock = high;
             company.low = low;
             lowStock = low;
-            //System.out.println("Date: " + date + "\nHigh: " + high + "\nLow: " + low);
+            // System.out.println("Date: " + date + "\nHigh: " + high + "\nLow: " + low);
             return company;
           }
         }
@@ -441,15 +455,8 @@ public class XMLDatabase {
     }
 
     return company;
-
   }
 
-  /**
-   * Checks if the given date exists in the specified XML file.
-   *
-   * @param givenDate The date to search for in the XML file.
-   * @return true if the date exists, false otherwise.
-   */
   /**
    * Checks if the given date exists in the specified XML file.
    *
@@ -459,7 +466,7 @@ public class XMLDatabase {
    */
   public boolean isDateExistInXML(String filePath, String givenDate) {
     try {
-      filePath = "./outputFile/"+filePath+"_StockData.xml";
+      filePath = "../outputFile/" + filePath + "_StockData.xml";
       File xmlFile = new File(filePath);
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -488,5 +495,4 @@ public class XMLDatabase {
     // System.out.print("The date your provided was not a business day");
     return false; // Given date not found
   }
-
 }

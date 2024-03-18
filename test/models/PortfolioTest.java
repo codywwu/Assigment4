@@ -1,8 +1,10 @@
 package models;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/** This is a simple testing class that test portfolio object. */
 public class PortfolioTest {
 
   private Portfolio portfolio;
@@ -40,5 +42,4 @@ public class PortfolioTest {
 
     assertEquals(80, portfolio.getTotalShares());
   }
-  }
-
+}

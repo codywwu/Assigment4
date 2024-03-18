@@ -7,9 +7,7 @@ import models.Company;
 import models.Portfolio;
 import models.Stock;
 
-/**
- * View class that handle all the print statements.
- */
+/** View class that handle all the print statements. */
 public class View {
 
   static Appendable out = null;
@@ -31,15 +29,19 @@ public class View {
    * print the stock value by given date.
    *
    * @param stock the stock needed to print.
-   * @param date  the date that parsing by stock.
+   * @param date the date that parsing by stock.
    * @throws IOException IO exception to catch unexpected error.
    */
   public static void printStockValueByGivenDate(Stock stock, String date) throws IOException {
-    View.out.append("\nEach ").append(stock.getCompanyName()).append(" share worth following on: ")
+    View.out
+        .append("\nEach ")
+        .append(stock.getCompanyName())
+        .append(" share worth following on: ")
         .append(date);
-    View.out.append("\nYou have ").append(String.valueOf(stock.getUserShared()))
+    View.out
+        .append("\nYou have ")
+        .append(String.valueOf(stock.getUserShared()))
         .append(" shares on this company");
-
   }
 
   /**
@@ -64,6 +66,7 @@ public class View {
 
   /**
    * print some new lines.
+   *
    * @throws IOException IO exception to catch unexpected error.
    */
   public static void newLines() throws IOException {
@@ -87,7 +90,8 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public static void printMaxTotalValue(double totalHighValue) throws IOException {
-    View.out.append("\nTotal portfolio value based on highest stock prices: ")
+    View.out
+        .append("\nTotal portfolio value based on highest stock prices: ")
         .append(String.valueOf(totalHighValue));
   }
 
@@ -98,7 +102,8 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public static void printMinTotalValue(double totalLowValue) throws IOException {
-    View.out.append("\nTotal portfolio value based on lowest stock prices: ")
+    View.out
+        .append("\nTotal portfolio value based on lowest stock prices: ")
         .append(String.valueOf(totalLowValue));
   }
 
@@ -114,13 +119,18 @@ public class View {
   /**
    * print the high and low value by given date.
    *
-   * @param date    the date.
+   * @param date the date.
    * @param company the company.
    * @throws IOException IO exception to catch unexpected error.
    */
   public static void printHighLowOnGivenDate(String date, Company company) throws IOException {
-    View.out.append("\nDate: ").append(date).append("\nHigh: ").append(company.getHigh())
-        .append("\nLow: ").append(company.getLow());
+    View.out
+        .append("\nDate: ")
+        .append(date)
+        .append("\nHigh: ")
+        .append(company.getHigh())
+        .append("\nLow: ")
+        .append(company.getLow());
   }
 
   /**
@@ -213,7 +223,7 @@ public class View {
    *
    * @throws IOException IO exception to catch unexpected error.
    */
-  public void NumberInvalidInput() throws IOException {
+  public void numberInvalidInput() throws IOException {
     View.out.append("\nInvalid input. Please enter a number.");
   }
 
@@ -224,7 +234,8 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void menuSelectInvalid(int range) throws IOException {
-    View.out.append("\nInvalid input. Please enter a number between 1 and ")
+    View.out
+        .append("\nInvalid input. Please enter a number between 1 and ")
         .append(String.valueOf(range));
   }
 
@@ -242,10 +253,9 @@ public class View {
    *
    * @throws IOException IO exception to catch unexpected error.
    */
-  public void InvalidInputGreaterThanZero() throws IOException {
+  public void invalidInputGreaterThanZero() throws IOException {
     View.out.append("\nThe number must be larger than 0. Please try again:");
   }
-
 
   /**
    * prompt for portfolio.
@@ -272,8 +282,8 @@ public class View {
    * @throws IOException IO exception to catch unexpected error.
    */
   public void promptDate() throws IOException {
-    View.out.append("\nPlease enter in a date to view "
-        + "the stock's profit on that date (Ex.2024-03-05): ");
+    View.out.append(
+        "\nPlease enter in a date to view " + "the stock's profit on that date (Ex.2024-03-05): ");
   }
 
   /**
@@ -303,7 +313,6 @@ public class View {
     View.out.append(
         "\nPortfolio did not import correctly, please go back to import interface and try again");
   }
-
 
   /**
    * successfully imported a xml file.
@@ -337,13 +346,17 @@ public class View {
   /**
    * tell user has successfully purchased.
    *
-   * @param quantity      quantity of purchase.
+   * @param quantity quantity of purchase.
    * @param companySymbol company symbol.
    * @throws IOException IO exception to catch unexpected error.
    */
   public void successPurchase(int quantity, String companySymbol) throws IOException {
-    View.out.append("\nYou have chosen to purchase ").append(String.valueOf(quantity))
-        .append(" shares of ").append(companySymbol).append(".");
+    View.out
+        .append("\nYou have chosen to purchase ")
+        .append(String.valueOf(quantity))
+        .append(" shares of ")
+        .append(companySymbol)
+        .append(".");
   }
 
   /**
@@ -364,7 +377,6 @@ public class View {
     View.out.append("\nAdd another company with shares or select done for done creating this port");
   }
 
-
   /**
    * print all the portfolio information inside the portfolio.
    *
@@ -376,14 +388,19 @@ public class View {
       Portfolio portfolio = portfolioList.get(p);
       // Print the portfolio index and size of its stock list
 
-      View.out.append("\nPortfolio ").append(String.valueOf(p + 1))
+      View.out
+          .append("\nPortfolio ")
+          .append(String.valueOf(p + 1))
           .append(" - The shares of your portfolio in total: ")
           .append(String.valueOf(portfolio.getTotalShares()));
 
       // Iterate through the stockArrayList of the current portfolio
       for (int i = 0; i < portfolio.stockArrayList.size(); i++) {
         // Print the company name of each stock
-        View.out.append("\nStock ").append(String.valueOf(i + 1)).append(": ")
+        View.out
+            .append("\nStock ")
+            .append(String.valueOf(i + 1))
+            .append(": ")
             .append(portfolio.stockArrayList.get(i).getCompanyName());
       }
       // Add a new line for better readability between portfolios
@@ -392,8 +409,8 @@ public class View {
   }
 
   /**
-   * @param portfolios portfolios class.
-   * Display the stocks info inside the portfolio.
+   * Display the portfolio of the user.
+   * @param portfolios portfolios class. Display the stocks info inside the portfolio.
    * @throws IOException IO exception to catch unexpected error.
    */
   public void displayPortfolios(List<Portfolio> portfolios) throws IOException {
@@ -410,7 +427,7 @@ public class View {
   /**
    * display stock's information.
    *
-   * @param portfolios      portfolios.
+   * @param portfolios portfolios.
    * @param inputPortfolios the input portfolios.
    * @throws IOException if there is an empty list.
    */
@@ -429,7 +446,7 @@ public class View {
   /**
    * stock menu.
    *
-   @throws IOException IO exception to catch unexpected error.
+   * @throws IOException IO exception to catch unexpected error.
    */
   public void stockMenu() throws IOException {
     View.out.append("\n1, Exit to Main menu");
@@ -441,7 +458,7 @@ public class View {
   /**
    * portfolio's menu.
    *
-   @throws IOException IO exception to catch unexpected error.
+   * @throws IOException IO exception to catch unexpected error.
    */
   public void portfolioMenu() throws IOException {
     View.out.append("\n1, Exit to Main menu");
@@ -450,9 +467,7 @@ public class View {
     View.out.append("\nPlease enter the number corresponding to your choice: ");
   }
 
-  /**
-   * Saying good bey to user.
-   */
+  /** Saying good bey to user. */
   public void goodBey() {
     System.out.println("Good Bye");
   }

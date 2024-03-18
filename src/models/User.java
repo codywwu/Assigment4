@@ -2,9 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * User class that implments the user interface class.
- */
+/** User class that implements the user interface class. */
 public class User implements UserInterface {
   String userName;
 
@@ -12,22 +10,24 @@ public class User implements UserInterface {
 
   double buyingPower;
 
-
   ArrayList<Portfolio> portfolioList = new ArrayList<>();
 
   /**
    * User class that contians name and buying power.
+   *
    * @param userName name.
    * @param buyingPower buying power.
    */
-  public User(String userName, double buyingPower){
+  public User(String userName, double buyingPower) {
     this.userName = userName;
-    //this.passWord = passWord;
+    // this.passWord = passWord;
     this.buyingPower = buyingPower;
   }
+
   /**
    * get the username.
-   * @return  username
+   *
+   * @return username
    */
   @Override
   public String getUserName() {
@@ -36,22 +36,25 @@ public class User implements UserInterface {
 
   /**
    * Set buying power.
+   *
    * @param buyingPower the buying power.
    */
-  public void setBuyingPower(double buyingPower){
+  public void setBuyingPower(double buyingPower) {
     this.buyingPower = buyingPower;
   }
 
   /**
-   * Set the password
+   * Set the password.
+   *
    * @param passWord set the password.
    */
-  public void setPassWord(String passWord){
+  public void setPassWord(String passWord) {
     this.passWord = passWord;
   }
 
   /**
-   *  get the password.
+   * get the password.
+   *
    * @return the password.
    */
   @Override
@@ -61,6 +64,7 @@ public class User implements UserInterface {
 
   /**
    * Get the buying power.
+   *
    * @return buying power.
    */
   @Override
@@ -68,10 +72,7 @@ public class User implements UserInterface {
     return buyingPower;
   }
 
-  /**
-   * add a portfolio into the user's portfolio list.
-   *
-   */
+  /** add a portfolio into the user's portfolio list. */
   @Override
   public void addPortfolio(Portfolio newPortfolio) {
     portfolioList.add(newPortfolio);
@@ -90,10 +91,10 @@ public class User implements UserInterface {
 
   /**
    * Get the portfolio list.
+   *
    * @return a list of portfolio.
    */
-  public ArrayList<Portfolio> getPortfolioList(){
+  public ArrayList<Portfolio> getPortfolioList() {
     return portfolioList;
   }
 }
-

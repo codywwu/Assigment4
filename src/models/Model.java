@@ -4,10 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Model of the project that will be the bridge between the controller and view.
- */
-public class Model implements ModelInterface{
+/** Model of the project that will be the bridge between the controller and view. */
+public class Model implements ModelInterface {
 
   private XMLDatabase xmlDatabase;
   private List<Portfolio> userPortfolios;
@@ -15,9 +13,7 @@ public class Model implements ModelInterface{
 
   private Portfolio portfolio;
 
-  /**
-   * constructor for model, that would take a database.
-   */
+  /** constructor for model, that would take a database. */
   public Model() {
     xmlDatabase = new XMLDatabase();
   }
@@ -46,7 +42,7 @@ public class Model implements ModelInterface{
   /**
    * Add the user into the xml.
    *
-   * @param username    name to be added.
+   * @param username name to be added.
    * @param buyingPower the bp, set to be 1000.
    */
   public void creatUser(String username, float buyingPower) {
@@ -54,9 +50,7 @@ public class Model implements ModelInterface{
     xmlDatabase.addUser(username);
   }
 
-  /**
-   * add the portfolio into the user.
-   */
+  /** add the portfolio into the user. */
   public void addPortfolioUser() {
     user.addPortfolio(portfolio);
   }
@@ -96,6 +90,10 @@ public class Model implements ModelInterface{
    * @return true is exist.
    */
   public boolean checkPortfolioName(String input) {
+   return checkPortfolioNamePrivate(input);
+  }
+
+  private boolean checkPortfolioNamePrivate(String input){
     userPortfolios = getUserPortfolios();
     if (userPortfolios == null) {
       return false;
@@ -121,16 +119,14 @@ public class Model implements ModelInterface{
    * create stock.
    *
    * @param companySymbol company symbol.
-   * @param userShared    shares from user.
+   * @param userShared shares from user.
    * @return stock.
    */
   public Stock createStock(String companySymbol, long userShared) {
     return new Stock(companySymbol, userShared);
   }
 
-  /**
-   * a new xml.
-   */
+  /** a new xml. */
   public void newXML() {
     xmlDatabase = new XMLDatabase();
   }
@@ -139,7 +135,7 @@ public class Model implements ModelInterface{
    * check if any data in XML file.
    *
    * @param stock stock of the file.
-   * @param date  the data.
+   * @param date the data.
    * @return true if data is in xml.
    */
   public boolean dataCheckExistInXML(Stock stock, String date) {
@@ -182,13 +178,10 @@ public class Model implements ModelInterface{
     portfolio.addStock(stock);
   }
 
-  /**
-   * add portfolio into XML.
-   */
+  /** add portfolio into XML. */
   public void addPToXML() {
     xmlDatabase.addPortfolioXML(getUserName(), portfolio.name, portfolio);
   }
-
 
   /**
    * add the company into XML.
@@ -215,9 +208,13 @@ public class Model implements ModelInterface{
    * @return true if existed.
    */
   public boolean checkFileExists(String inFile) {
-    File folder = new File("./InputData/");
+    return checkFileExistsPrivate(inFile);
+  }
 
-//    return folder.exists();
+  public boolean checkFileExistsPrivate(String inFile){
+    File folder = new File("../InputData/");
+
+    //    return folder.exists();
     File[] files = folder.listFiles();
     if (files != null) {
       // Iterate over each file and print its name

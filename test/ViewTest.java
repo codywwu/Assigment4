@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import views.View;
 
+/**
+ * view test that test view.
+ */
 public class ViewTest {
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
   private final PrintStream originalOut = System.out;
@@ -24,7 +27,7 @@ public class ViewTest {
 
   @Test
   public void testDisplayWelcomeMessage() throws IOException {
-    View view =new View(System.out);
+    View view = new View(System.out);
     view.displayWelcomeMessage("TestUser");
     assertEquals("\nHello TestUser, Welcome To Money For US", outContent.toString());
   }

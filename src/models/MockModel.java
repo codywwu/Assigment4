@@ -3,25 +3,29 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import views.View;
 
+/** Mock model that offer testing method to verify the implementation. */
 public class MockModel implements ModelInterface {
 
   private StringBuilder log;
-  private final Stock empty= new Stock("GOOG", 333);
+  private final Stock empty = new Stock("GOOG", 333);
 
   private List<Portfolio> userPortfolios;
   private User user;
 
   private Portfolio portfolio;
 
+  /**
+   * Constructor for mock model.
+   * @param log log information.
+   */
   public MockModel(StringBuilder log) {
-    this.log=log;
-    this.portfolio=new Portfolio("Po1");
+    this.log = log;
+    this.portfolio = new Portfolio("Po1");
     this.portfolio.addStock(empty);
-    this.user=new User("inNAme",1000);
+    this.user = new User("inNAme", 1000);
     user.addPortfolio(portfolio);
-    userPortfolios=user.getPortfolioList();
+    userPortfolios = user.getPortfolioList();
   }
 
   @Override
@@ -31,7 +35,10 @@ public class MockModel implements ModelInterface {
 
   @Override
   public void creatUser(String username, float buyingPower) {
-    log.append("creating user ").append(username).append(" with ").append(buyingPower)
+    log.append("creating user ")
+        .append(username)
+        .append(" with ")
+        .append(buyingPower)
         .append(" buy in power");
   }
 
@@ -114,16 +121,12 @@ public class MockModel implements ModelInterface {
 
   @Override
   public void addPToXML() {
-
+    //add portfolio to XML
   }
 
   @Override
   public void addCompanyXML(String c) {
-
+    //add company to XML.
   }
 
-  public boolean checkIfPortfolioEmpty(List<Portfolio> userPortfolios){
-    log.append("if user created any portfolio");
-    return true;
-  }
 }

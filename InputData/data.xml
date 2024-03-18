@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<users>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><users>
   <user name="Dell">
     <password value=""/>
     <portfolios>
@@ -9,4 +8,4 @@
       </portfolio>
     </portfolios>
   </user>
-</users>
+<user name="wwq"><password value=""/><portfolios><portfolio name="WWA"><stock name="AAPL" value="20"/><stock name="GOOG" value="10"/></portfolio></portfolios></user></users>

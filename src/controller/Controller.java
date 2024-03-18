@@ -16,9 +16,7 @@ import models.XMLDatabase;
 
 import views.View;
 
-/**
- * Controller class that would handle all the logic.
- */
+/** Controller class that would handle all the logic. */
 public class Controller {
 
   private Scanner input;
@@ -32,17 +30,16 @@ public class Controller {
    * constructor for controller.
    *
    * @param model interface of the model.
-   * @param in    system in.
-   * @param out   system out.
+   * @param in system in.
+   * @param out system out.
    */
   public Controller(ModelInterface model, Readable in, Appendable out) {
     this.in = in;
     this.out = out;
     this.input = new Scanner(this.in);
     this.view = new View(out);
-    this.model= model;
+    this.model = model;
   }
-
 
   /**
    * introduction menu for user.
@@ -123,7 +120,6 @@ public class Controller {
     }
   }
 
-
   /**
    * view stocks information .
    *
@@ -160,7 +156,8 @@ public class Controller {
         break;
       case 945935:
         return;
-
+      default:
+        return;
     }
   }
 
@@ -176,7 +173,7 @@ public class Controller {
     while (!isValidDateFormat(date)) {
       date = input.nextLine();
     }
-    //Model.displayPortfolioValueByGivenDate(model.getUserPortfolios(), date,portfolioName );
+    // Model.displayPortfolioValueByGivenDate(model.getUserPortfolios(), date,portfolioName );
     boolean validDate = false;
     double totalHighValue = 0;
     double totalLowValue = 0;
@@ -187,7 +184,7 @@ public class Controller {
       } else {
         for (Portfolio portfolio : model.getUserPortfolios()) {
           if (portfolio.name.equals(portfolioName)) {
-            //View.printPortfolioName(portfolio.name);
+            // View.printPortfolioName(portfolio.name);
             for (Stock stock : portfolio.getStocks()) {
               if (model.dataCheckExistInXML(stock, date)) {
                 validDate = true;
@@ -196,6 +193,7 @@ public class Controller {
                 if (company.getHasValidDate()) {
                   View.printHighLowOnGivenDate(date, company);
                 }
+
 
                 double high = Double.parseDouble(model.getDatahigh()) * stock.getUserShared();
                 View.printMaxValue(high);
@@ -218,12 +216,12 @@ public class Controller {
         // After validating date and calculating values, print total portfolio values
         View.printMaxTotalValue(totalHighValue);
         View.printMinTotalValue(totalLowValue);
-
       }
     }
     View.endOfYourPortfolio();
     showUserPortfolio();
   }
+
 
   /**
    * check if the date is valid.
@@ -254,20 +252,18 @@ public class Controller {
   public boolean validMenuSelection(int input, int range) throws IOException {
     if ((input <= 0 || input > range)) {
       view.menuSelectInvalid(range);
-    }if (input==945935){
+    }
+    if (input == 945935) {
       return false;
     }
     return input <= 0 || input > range;
   }
 
-  /**
-   * end the program.
-   */
+  /** end the program. */
   public void exitProgram() {
     view.goodBey();
     return;
   }
-
 
   int portfolioNumber = 1;
 
@@ -279,7 +275,7 @@ public class Controller {
   public void setPortfolio() throws IOException {
     menuSelection = 0;
     while (true) {
-      //Creating new portfolio here.
+      // Creating new portfolio here.
       String portfolioName = "Portfolio" + portfolioNumber;
       model.createPortfolio(portfolioName);
       view.createPortfolio();
@@ -291,7 +287,7 @@ public class Controller {
         }
         break; // Break out of the loop if input is valid
       } catch (InputMismatchException e) {
-        view.NumberInvalidInput();
+        view.numberInvalidInput();
         input.nextLine(); // Consume the invalid input
       }
     }
@@ -301,7 +297,7 @@ public class Controller {
         break;
       case 2:
         setPortfolioName();
-        FillForm();
+        fillForm();
         break;
       case 3:
         mainMenu();
@@ -310,6 +306,8 @@ public class Controller {
         exitProgram();
         break;
       case 945935:
+        return;
+      default:
         return;
     }
   }
@@ -360,14 +358,14 @@ public class Controller {
    *
    * @throws IOException IO exception to catch unexpected error.
    */
-  private void FillForm() throws IOException {
+  private void fillForm() throws IOException {
 
     String companySymbol = null;
     view.fillFormIntro();
     int quantity = -1; // Initialize to an invalid value to enter the loop
     while (companySymbol == null) {
       companySymbol = input.next();
-      if (CheckValidCompanySymbol(companySymbol)) {
+      if (checkValidCompanySymbol(companySymbol)) {
         // Creating the company file.
         model.addCompanyXML(companySymbol);
         // if valid, prompt for the quantity of purchase.
@@ -376,10 +374,10 @@ public class Controller {
           try {
             quantity = input.nextInt();
             if (quantity <= 0) {
-              view.InvalidInputGreaterThanZero();
+              view.invalidInputGreaterThanZero();
             }
           } catch (InputMismatchException e) {
-            view.NumberInvalidInput();
+            view.numberInvalidInput();
             input.next(); // Consume the invalid input and prompt again
           }
         }
@@ -403,12 +401,16 @@ public class Controller {
     switch (menuSelection) {
       case 1:
         portfolioNumber++;
-        FillForm();
+        fillForm();
         break;
       case 2:
         doneCreatPortfolio();
       case 945935:
+        // Process input for case 945935
         return;
+        // Fall through: Fall through from previous branch of the switch statement
+      default:
+        // Handle default case break;
     }
   }
 
@@ -440,7 +442,7 @@ public class Controller {
         }
         break; // Break out of the loop if input is valid
       } catch (InputMismatchException e) {
-        view.NumberInvalidInput();
+        view.numberInvalidInput();
         input.next(); // Consume the invalid input
       }
     }
@@ -456,6 +458,8 @@ public class Controller {
         break;
       case 945935:
         return;
+      default:
+        return;
     }
   }
 
@@ -465,8 +469,7 @@ public class Controller {
    * @param companySymbol The company symbol to check.
    * @return true if the company symbol exists in the XML database, false otherwise.
    */
-  private boolean CheckValidCompanySymbol(String companySymbol) {
+  private boolean checkValidCompanySymbol(String companySymbol) {
     return XMLDatabase.companySymbolExists(companySymbol);
   }
-
 }
